@@ -5,8 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvatarGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Icon=".\Icons\AvatarGUI-Icon.png"
+        Title="Avatar GUI - Pantalla principal" Height="600" Width="1000">
+    <Grid Margin="0,0,-0.4,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="SaveRoutineButton" Command="{Binding SaveRoutineCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Guardar Rutina" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="LoadRoutineButton" Command="{Binding LoadRoutineCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Cargar Rutina" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
+        <Button Name="HelpButtonFolder" Width="30" Height="30" Grid.Column="3" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="HelpButtonFolder_Click">
+            <Image Source=".\Icons\info.png" ></Image>
+        </Button>
+        <Button Name="HelpButtonIp" Width="30" Height="30" Grid.Column="7" Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Click="HelpButtonIp_Click">
+            <Image Source=".\Icons\info.png"></Image>
+        </Button>
+        <Button Name="HelpButtonRoutineName" Width="30" Height="30" Grid.Column="7" Grid.Row="2" Background="Transparent" BorderBrush="Transparent" Click="HelpButtonRoutineName_Click">
+            <Image Source=".\Icons\info.png"></Image>
+        </Button>
+        <Button Name="HelpButtonSceneList" Width="30" Height="30" Grid.Column="2" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" Click="HelpButtonSceneList_Click">
+            <Image Source=".\Icons\info.png"></Image>
+        </Button>
+        <TextBlock TextWrapping="Wrap" Text="Ruta a carpeta remota:" FontSize="15" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right"/>
+        <TextBox Background="Azure" Margin="10 10 10 10" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Name="RemoteFolder" Text="{Binding RemoteFolder}" TextWrapping="Wrap" TextAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <TextBlock TextWrapping="Wrap" Text="IP PC Remoto:" FontSize="15" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right"/>
+        <TextBox Background="Azure" Margin="10 10 10 10" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2"  Name="RemotePcDirection" Text="{Binding RemoteIP}" TextWrapping="Wrap" TextAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <Border Grid.Row="3" Grid.ColumnSpan="2" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="AddSceneButton" Command="{Binding AddSceneCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Agregar Escena" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
+        <TextBlock TextWrapping="Wrap" Text="Carpeta de Audios:" FontSize="15" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right"/>
+        <TextBox Background="Azure" Margin="10 10 10 10" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2"  Name="RoutineName" Text="{Binding AudioFolderName}" TextWrapping="Wrap" TextAlignment="Center" VerticalContentAlignment="Center" FontSize="15"/>
+        <ListView Name="SceneList" Grid.Row="4" Grid.ColumnSpan="8" ItemsSource="{Binding SceneList}" Margin="20" Background="LightGray">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding EditSceneCommand}" Content="{Binding AllInfo}" FontSize="15" Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                AncestorType=Window}, Path=ItemWidth}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Border Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="0" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="PlayButton" Command="{Binding PlayCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Reproducir" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
+        <Border Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="3" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="PauseButton" Command="{Binding PauseCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Pausar" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
+        <Border Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="6" Margin="15" Background="#3471eb" BorderBrush="DimGray" BorderThickness="1" CornerRadius="8">
+            <Button Name="StopButton" Command="{Binding StopCommand}" Margin="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Parar" TextWrapping="Wrap" FontSize="15" Foreground="White"/>
+            </Button>
+        </Border>
     </Grid>
 </Window>
