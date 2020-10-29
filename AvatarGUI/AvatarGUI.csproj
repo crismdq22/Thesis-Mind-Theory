@@ -180,5 +180,11 @@
   <ItemGroup>
     <Resource Include="Icons\AvatarGUI-Icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Arrow-up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Arrow-down.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

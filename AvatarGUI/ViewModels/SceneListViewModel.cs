@@ -308,6 +308,29 @@ namespace AvatarGUI.ViewModels
             sceneWindow.ShowDialog();
         }
 
+        public void MoveSceneUp(SceneViewModel sceneViewModel)
+        {
+            if (getNumeroEscena(sceneViewModel) > 0)
+            {
+                SwapScenes(getNumeroEscena(sceneViewModel), getNumeroEscena(sceneViewModel) - 1);
+            }
+        }
+
+        public void MoveSceneDown(SceneViewModel sceneViewModel)
+        {
+            if (getNumeroEscena(sceneViewModel) < SceneList.Count - 1)
+            {
+                SwapScenes(getNumeroEscena(sceneViewModel), getNumeroEscena(sceneViewModel) + 1);
+            }
+        }
+
+        private void SwapScenes(int firstIndex, int secondIndex)
+        {
+            SceneViewModel aux = SceneList[firstIndex];
+            SceneList[firstIndex] = SceneList[secondIndex];
+            SceneList[secondIndex] = aux;
+        }
+
         public void DeleteScene(SceneViewModel viewModel)
         {
             sceneWindow.Close();

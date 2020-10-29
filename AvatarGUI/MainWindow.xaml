@@ -62,8 +62,16 @@
         <ListView Name="SceneList" Grid.Row="4" Grid.ColumnSpan="8" ItemsSource="{Binding SceneList}" Margin="20" Background="LightGray">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding EditSceneCommand}" Content="{Binding AllInfo}" FontSize="15" Width="{Binding RelativeSource={RelativeSource FindAncestor,
-                AncestorType=Window}, Path=ItemWidth}"/>
+                    <WrapPanel Orientation="Horizontal">
+                        <Button Command="{Binding EditSceneCommand}" Content="{Binding AllInfo}" FontSize="15" Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                    AncestorType=Window}, Path=ItemWidth}"/>
+                        <Button Name="MoveSceneUp" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Command="{Binding MoveSceneUpCommand}">
+                            <Image Source=".\Icons\Arrow-up.jpg"></Image>
+                        </Button>
+                        <Button Name="MoveSceneDown" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Command="{Binding MoveSceneDownCommand}">
+                            <Image Source=".\Icons\Arrow-down.jpg"></Image>
+                        </Button>
+                    </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>

@@ -55,6 +55,8 @@ namespace AvatarGUI.ViewModels
         {
             parentVM = vm;
             EditSceneCommand= new RelayCommand(new Action<object>(EditScene));
+            MoveSceneUpCommand = new RelayCommand(new Action<object>(MoveSceneUp));
+            MoveSceneDownCommand = new RelayCommand(new Action<object>(MoveSceneDown));
             DeleteCommand = new RelayCommand(new Action<object>(DeleteScene));
             EditStepsCommand = new RelayCommand(new Action<object>(EditSteps));
             SaveChangesCommand = new RelayCommand(new Action<object>(SaveChanges));
@@ -107,6 +109,33 @@ namespace AvatarGUI.ViewModels
                 _editSceneCommand = value;
             }
         }
+
+        private ICommand _moveSceneUpCommand;
+        public ICommand MoveSceneUpCommand
+        {
+            get
+            {
+                return _moveSceneUpCommand;
+            }
+            set
+            {
+                _moveSceneUpCommand = value;
+            }
+        }
+
+        private ICommand _moveSceneDownCommand;
+        public ICommand MoveSceneDownCommand
+        {
+            get
+            {
+                return _moveSceneDownCommand;
+            }
+            set
+            {
+                _moveSceneDownCommand = value;
+            }
+        }
+
         private ICommand _saveChangesCommand;
         public ICommand SaveChangesCommand
         {
@@ -203,6 +232,16 @@ namespace AvatarGUI.ViewModels
         private void EditScene(object obj)
         {
             parentVM.EditScene(this);
+        }
+
+        private void MoveSceneUp(object obj)
+        {
+            parentVM.MoveSceneUp(this);
+        }
+
+        private void MoveSceneDown(object obj)
+        {
+            parentVM.MoveSceneDown(this);
         }
 
         private void DeleteScene(object obj)
