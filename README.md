@@ -4,4 +4,4 @@ The user can dictate which models to use, where to position them, and a step by 
 patient to observe and empathize to, through animations and audio clips or subtitles on screen. Fully customizable by the user previous to runtime, through client side GUI made in WPF, utilizing 
 the included models, animations and audio clips. The system allow for easy inclusion of any other of this kind of assets.
 
-This repo is for the Client GUI only. For the unity player, see Thesis-Mind-Theory-Player.
+This repo is for the Client GUI only. For the unity player, will upload upon request (due to github not supporting big files like the models).
