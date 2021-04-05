@@ -11,6 +11,7 @@ namespace AvatarGUI
         public static byte PLAY = 0;
         public static byte PAUSE = 1;
         public static byte STOP = 2;
+        public static byte SENDJSON = 3;
         public static string PREFAB_VACIO = "Vacio";
         public static int NARRATOR = -1;
         public static int TEXTMODE = 0;

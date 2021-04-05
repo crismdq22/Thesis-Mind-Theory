@@ -49,8 +49,6 @@ namespace AvatarGUI.ViewModels
             } 
         }
 
-        private string RemoteSharedFolder;
-
         private ICommand _addSceneCommand;
         public ICommand AddSceneCommand
         {
@@ -227,37 +225,24 @@ namespace AvatarGUI.ViewModels
             IPAddress iPAddress;
             if (RemoteIP != null && IPAddress.TryParse(RemoteIP, out iPAddress) && IsIPValid(iPAddress))
             {
-                if (RemoteFolder!=null && RemoteFolder.Length > 2)
-                { 
-                    RemoteSharedFolder = @"\\" + @RemoteIP + @RemoteFolder.Substring(2); 
-                    if (Directory.Exists(RemoteSharedFolder) && Directory.GetDirectories(RemoteSharedFolder).Contains(RemoteSharedFolder+@"\TesisTOM_Data"))
+                if (tCPAgent.isConnected)
+                {
+                    tCPAgent.SendMessage(Constants.PLAY);
+                }
+                else
+                {
+                    if (JSONViewModelConverter.Instance.ViewModelToJson(this).state)
                     {
-                            if (tCPAgent.isConnected)
-                            {
-                                tCPAgent.SendMessage(Constants.PLAY);
-                            }
-                            else
-                            {
-                                if (JSONViewModelConverter.Instance.ViewModelToJson(this).state)
-                                {
-                                    File.WriteAllText(@RemoteSharedFolder + @"\TesisTOM_Data\StreamingAssets\data.json", JSONViewModelConverter.Instance.ViewModelToJson(this).data);
-                                    tCPAgent.ConnectServer(RemoteIP);
-                                    tCPAgent.SendMessage(Constants.PLAY);
-                                }
-                                else
-                                {
-                                    ShowIntegrityErrors(JSONViewModelConverter.Instance.ViewModelToJson(this).data);
-                                }
-                            }
-
+                        tCPAgent.ConnectServer(RemoteIP);
+                        tCPAgent.SendMessage(Constants.SENDJSON);
+                        tCPAgent.SendJson(JSONViewModelConverter.Instance.ViewModelToJson(this).data);
+                        tCPAgent.SendMessage(Constants.PLAY);
                     }
                     else
                     {
-                         MessageBox.Show("Directorio remoto no valido");
+                        ShowIntegrityErrors(JSONViewModelConverter.Instance.ViewModelToJson(this).data);
                     }
                 }
-                else                    
-                  MessageBox.Show("Directorio remoto no valido");
             }
             else
                 MessageBox.Show("IP no Valida");
@@ -265,25 +250,18 @@ namespace AvatarGUI.ViewModels
 
         private void PauseRoutine(object obj)
         {
-            if (RemoteSharedFolder != null && Directory.Exists(@RemoteSharedFolder))
+            if (tCPAgent.isConnected)
             {
-                if (tCPAgent.isConnected)
-                {
-                    tCPAgent.SendMessage(Constants.PAUSE);
-                }
-                else
-                {
-                    MessageBox.Show("Conexion con el reproductor no establecida.");
-                }     
+                tCPAgent.SendMessage(Constants.PAUSE);
             }
             else
-                MessageBox.Show("Directorio no valido");
+            {
+                MessageBox.Show("Conexion con el reproductor no establecida.");
+            }     
         }
 
         private void StopRoutine(object obj)
         {
-            if (RemoteSharedFolder != null && Directory.Exists(@RemoteSharedFolder))
-            {
                 if (tCPAgent.isConnected)
                 {
                     tCPAgent.SendMessage(Constants.STOP);
@@ -292,9 +270,6 @@ namespace AvatarGUI.ViewModels
                 {
                     MessageBox.Show("Conexion con el reproductor no establecida.");
                 }
-            }
-            else
-                MessageBox.Show("Directorio no valido");
         }
 
         public int getNumeroEscena(SceneViewModel sceneViewModel)

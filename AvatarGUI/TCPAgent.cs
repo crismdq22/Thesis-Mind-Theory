@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -29,16 +30,7 @@ namespace AvatarGUI
             }
             catch
             {
-                _isConnected = false;
-                try
-                {
-                    sender.Shutdown(SocketShutdown.Both);
-                    sender.Close();
-                }catch (SocketException)
-                {
-
-                }                
-                MessageBox.Show("Conexion con el reproductor no establecida.");
+                CatchNoConnection();
             }
             
             if (message == Constants.STOP && _isConnected)
@@ -47,6 +39,36 @@ namespace AvatarGUI
                 sender.Shutdown(SocketShutdown.Both);
                 sender.Close();
             }           
+        }
+
+        public void SendJson(string message)
+        {
+            try
+            {
+                BinaryWriter writer = new BinaryWriter(new NetworkStream(sender));
+                writer.Write(message);
+                writer.Close();
+                sender.Receive(new byte[] { });
+            }
+            catch
+            {
+                CatchNoConnection();
+            }
+        }
+
+        private void CatchNoConnection()
+        {
+            _isConnected = false;
+            try
+            {
+                sender.Shutdown(SocketShutdown.Both);
+                sender.Close();
+            }
+            catch (SocketException)
+            {
+
+            }
+            MessageBox.Show("Conexion con el reproductor no establecida.");
         }
 
         public void ConnectServer(string iPRemote)
