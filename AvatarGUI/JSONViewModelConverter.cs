@@ -51,7 +51,7 @@ namespace AvatarGUI
                     if (step.actor == Constants.NARRATOR && (sceneViewModel.scene.narratorMode == Constants.AUDIOMODE || sceneViewModel.scene.narratorMode == Constants.TEXTAUDIOMODE)
                         || step.actor != Constants.NARRATOR && (sceneViewModel.scene.characterMode == Constants.AUDIOMODE || sceneViewModel.scene.characterMode == Constants.TEXTAUDIOMODE))
                     {
-                        if (step.audioName == null || viewmodel.AudioFolderName != null && !step.audioName.StartsWith(viewmodel.AudioFolderName) && viewmodel.AudioFolderName != "")
+                        if (step.audioName == null || viewmodel.AudioFolderName != null && !step.audioName.Contains(viewmodel.AudioFolderName) && viewmodel.AudioFolderName != "")
                         {
                             return new SerializerHelper(SerializerHelper.SERIALIZATION_FAIL, 
                                 string.Format("La escena {0} tiene en el paso {1} ningun audio asignado, siendo que esta en modo de uso de audio."

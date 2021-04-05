@@ -33,12 +33,6 @@ namespace AvatarGUI
             CollectionViewSource.GetDefaultView(SceneList.ItemsSource).Refresh();
         }
 
-        private void HelpButtonFolder_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Aqui debe especificarse la ruta a la carpeta donde se encuentra el reproductor de rutinas en la maquina remota." 
-                + Environment.NewLine + @"Por ejemplo: C:\Usuarios\Usuario\Escritorio\TesisTom");
-        }
-
         private void HelpButtonIp_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Aqui debe especificarse la IP de la maquina remota." + Environment.NewLine + "Por ejemplo: 192.168.0.138");
